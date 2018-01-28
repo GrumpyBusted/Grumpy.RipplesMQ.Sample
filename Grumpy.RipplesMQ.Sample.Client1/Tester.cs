@@ -26,7 +26,7 @@ namespace Grumpy.RipplesMQ.Sample.Client1
             _messageBus = builder.Build();
             _messageBus.Start(_cancellationTokenSource.Token);
 
-            Console.WriteLine($"Control+1: Publish Topic=PersonCreated Dto=PersonDto");
+            Console.WriteLine("Control+1: Publish Topic=PersonCreated Dto=PersonDto");
             Console.WriteLine($"The {_processInformation.ProcessName} tester is now running, press Control+C to exit.");
         }
 
