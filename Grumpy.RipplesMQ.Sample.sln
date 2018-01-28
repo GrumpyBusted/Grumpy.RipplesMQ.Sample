@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9BE6D5BA-5BF3-4CFE-A741-804464CF01CF}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grumpy.RipplesMQ.Sample.Broker1", "Grumpy.RipplesMQ.Sample.Broker1\Grumpy.RipplesMQ.Sample.Broker1.csproj", "{A9D1B1EB-D748-471B-A19B-DC1BD8E2335C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grumpy.RipplesMQ.Sample.Broker2", "Grumpy.RipplesMQ.Sample.Broker2\Grumpy.RipplesMQ.Sample.Broker2.csproj", "{BB79336A-BA51-43A6-97B9-E49C7F35FF4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grumpy.RipplesMQ.Sample.Server1", "Grumpy.RipplesMQ.Sample.Server1\Grumpy.RipplesMQ.Sample.Server1.csproj", "{92163158-6053-4BFA-BD90-1AA9392DC263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grumpy.RipplesMQ.Sample.API", "Grumpy.RipplesMQ.Sample.API\Grumpy.RipplesMQ.Sample.API.csproj", "{5056CCC9-3AFD-4AAC-AA54-C6CFFF22C51C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grumpy.RipplesMQ.Sample.Server2", "Grumpy.RipplesMQ.Sample.Server2\Grumpy.RipplesMQ.Sample.Server2.csproj", "{F5DFBFFA-4CCA-45CA-9DE9-7D1C09C1625D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grumpy.RipplesMQ.Sample.Server3", "Grumpy.RipplesMQ.Sample.Server3\Grumpy.RipplesMQ.Sample.Server3.csproj", "{0E6D65EC-3B05-449D-AC83-806782291567}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grumpy.RipplesMQ.Sample.Client1", "Grumpy.RipplesMQ.Sample.Client1\Grumpy.RipplesMQ.Sample.Client1.csproj", "{829A1E52-C7AB-4914-96FE-080E98B04658}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9D1B1EB-D748-471B-A19B-DC1BD8E2335C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D1B1EB-D748-471B-A19B-DC1BD8E2335C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D1B1EB-D748-471B-A19B-DC1BD8E2335C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D1B1EB-D748-471B-A19B-DC1BD8E2335C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB79336A-BA51-43A6-97B9-E49C7F35FF4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB79336A-BA51-43A6-97B9-E49C7F35FF4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB79336A-BA51-43A6-97B9-E49C7F35FF4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB79336A-BA51-43A6-97B9-E49C7F35FF4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92163158-6053-4BFA-BD90-1AA9392DC263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92163158-6053-4BFA-BD90-1AA9392DC263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92163158-6053-4BFA-BD90-1AA9392DC263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92163158-6053-4BFA-BD90-1AA9392DC263}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5056CCC9-3AFD-4AAC-AA54-C6CFFF22C51C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5056CCC9-3AFD-4AAC-AA54-C6CFFF22C51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5056CCC9-3AFD-4AAC-AA54-C6CFFF22C51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5056CCC9-3AFD-4AAC-AA54-C6CFFF22C51C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5DFBFFA-4CCA-45CA-9DE9-7D1C09C1625D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5DFBFFA-4CCA-45CA-9DE9-7D1C09C1625D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5DFBFFA-4CCA-45CA-9DE9-7D1C09C1625D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5DFBFFA-4CCA-45CA-9DE9-7D1C09C1625D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E6D65EC-3B05-449D-AC83-806782291567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E6D65EC-3B05-449D-AC83-806782291567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E6D65EC-3B05-449D-AC83-806782291567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E6D65EC-3B05-449D-AC83-806782291567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{829A1E52-C7AB-4914-96FE-080E98B04658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{829A1E52-C7AB-4914-96FE-080E98B04658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{829A1E52-C7AB-4914-96FE-080E98B04658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{829A1E52-C7AB-4914-96FE-080E98B04658}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F200387A-71ED-4B86-9957-26D0F59D74B6}
+	EndGlobalSection
+EndGlobal
