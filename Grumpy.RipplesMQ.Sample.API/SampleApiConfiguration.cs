@@ -25,7 +25,7 @@ namespace Grumpy.RipplesMQ.Sample.API
         public static readonly RequestResponseConfig Person = new RequestResponseConfig
         {
             Name = "Person",
-            MillisecondsTimeout = 100
+            MillisecondsTimeout = 1000000
         };
     }
 }

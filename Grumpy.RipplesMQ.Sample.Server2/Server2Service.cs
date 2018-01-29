@@ -58,7 +58,7 @@ namespace Grumpy.RipplesMQ.Sample.Server2
                     break;
             }
 
-            Console.WriteLine("Response Person: " + response?.SerializeToJson());
+            Console.WriteLine("Response Person: " + response.SerializeToJson());
 
             return response;
         }

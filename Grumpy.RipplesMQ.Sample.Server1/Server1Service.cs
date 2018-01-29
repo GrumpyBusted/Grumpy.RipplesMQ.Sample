@@ -19,7 +19,6 @@ namespace Grumpy.RipplesMQ.Sample.Server1
 
             _messageBus.SubscribeHandler<PersonDto>(SampleApiConfiguration.PersonCreated, HandlePersonCreated, "HandlePersonCreated", true, true);
             _messageBus.SubscribeHandler<TripDto>(SampleApiConfiguration.TripCreated, HandleTripCreated, "HandleTripCreated", true, true);
-
             _messageBus.RequestHandler<PersonKeyDto, PersonDto>(SampleApiConfiguration.Person, PersonHandler, true);
 
             _messageBus.Start(cancellationToken);
@@ -59,7 +58,7 @@ namespace Grumpy.RipplesMQ.Sample.Server1
                     break;
             }
 
-            Console.WriteLine("Response Person: " + response?.SerializeToJson());
+            Console.WriteLine("Response Person: " + response.SerializeToJson());
 
             return response;
         }

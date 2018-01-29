@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Grumpy.Common;
 using Grumpy.Common.Interfaces;
@@ -26,7 +27,10 @@ namespace Grumpy.RipplesMQ.Sample.Client1
             _messageBus = builder.Build();
             _messageBus.Start(_cancellationTokenSource.Token);
 
-            Console.WriteLine("Control+1: Publish Topic=PersonCreated Dto=PersonDto");
+            Console.WriteLine("Control+1: Publish Topic=PersonCreated Dto=PersonDto Persistent=true");
+            Console.WriteLine("Control+2: Publish Topic=TripCreated Dto=TripDto Persistent=false");
+            Console.WriteLine("Control+3: Request Name=Person");
+            Console.WriteLine("Control+4: Publish Topic=CarCreated Dto=CarDto Persistent=true");
             Console.WriteLine($"The {_processInformation.ProcessName} tester is now running, press Control+C to exit.");
         }
 
@@ -46,6 +50,12 @@ namespace Grumpy.RipplesMQ.Sample.Client1
                     Clear(out inputString);
                 else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D1)
                     PublishPersonCreated(ref inputString);
+                else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D2)
+                    PublishTripCreated(ref inputString);
+                else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D3)
+                    Request(ref inputString);
+                else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D4)
+                    PublishCarCreated(ref inputString);
                 else if ((key.Modifiers & ConsoleModifiers.Control) == 0 && (key.Modifiers & ConsoleModifiers.Alt) == 0 && key.Key != ConsoleKey.Backspace)
                     CaptureInput(ref inputString, key.KeyChar);
             }
@@ -65,28 +75,87 @@ namespace Grumpy.RipplesMQ.Sample.Client1
             Console.Write(key);
         }
 
-        private void PublishPersonCreated(ref string name)
+        private void PublishPersonCreated(ref string input)
         {
             var person = new PersonDto
             {
                 Id = 99,
-                Name = name,
+                Name = input,
                 BirthDate = DateTime.Today
             };
 
             Publish(SampleApiConfiguration.PersonCreated, person);
 
-            name = "";
+            input = "";
         }
 
-        private void Publish(PublishSubscribeConfig config, object message)
+        private void PublishTripCreated(ref string input)
+        {
+            var trip = new TripDto
+            {
+                Car = input,
+                Persons = new List<string>()
+            };
+
+            Publish(SampleApiConfiguration.TripCreated, trip);
+
+            input = "";
+        }
+
+        private void PublishCarCreated(ref string input)
+        {
+            var car = new CarDto
+            {
+                Make = input
+            };
+
+            Publish(SampleApiConfiguration.CarCreated, car);
+
+            input = "";
+        }
+
+        private void Publish<T>(PublishSubscribeConfig config, T message)
         {
             Console.WriteLine();
-
-            _messageBus.Publish(config, message);
-
             Console.WriteLine($"Publish - Topic: {config.Topic}");
-            Console.WriteLine(message.SerializeToJson());
+            Console.WriteLine("Message: " + message.SerializeToJson());
+
+            try
+            {
+                _messageBus.Publish(config, message);
+            }
+            catch(Exception exception)
+            {
+                Console.WriteLine("Exception publishing: " + exception.SerializeToJson());
+            }
+        }
+
+        private void Request(ref string input)
+        {
+            var request = new PersonKeyDto();
+
+            int.TryParse(input, out request.Id);
+
+            Request<PersonKeyDto, PersonDto>(SampleApiConfiguration.Person, request);
+
+            input = "";
+        }
+
+        private void Request<TReq, TRes>(RequestResponseConfig config, TReq request)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Request/Response - Name: {config.Name}");
+            Console.WriteLine("Request: " + request.SerializeToJson());
+
+            try
+            {
+                var response = _messageBus.Request<TReq, TRes>(config, request);
+                Console.WriteLine("Response: " + response.SerializeToJson());
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Exception publishing: " + exception.SerializeToJson());
+            }
         }
 
         private void Cancel()
