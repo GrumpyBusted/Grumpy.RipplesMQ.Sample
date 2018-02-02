@@ -51,11 +51,17 @@
     <PackageReference Include="Grumpy.Json">
       <Version>1.2.3</Version>
     </PackageReference>
+    <PackageReference Include="Grumpy.Logging">
+      <Version>0.9.3</Version>
+    </PackageReference>
     <PackageReference Include="Grumpy.RipplesMQ.Server">
-      <Version>1.1.19</Version>
+      <Version>1.1.25</Version>
     </PackageReference>
     <PackageReference Include="Grumpy.ServiceBase">
-      <Version>1.1.3</Version>
+      <Version>1.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console">
+      <Version>1.1.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

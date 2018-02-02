@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Threading;
 using Grumpy.Common;
 using Grumpy.Common.Interfaces;
@@ -9,6 +10,8 @@ using Grumpy.RipplesMQ.Client.Interfaces;
 using Grumpy.RipplesMQ.Config;
 using Grumpy.RipplesMQ.Sample.API;
 using Grumpy.RipplesMQ.Sample.API.DTOs;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Grumpy.RipplesMQ.Sample.Client1
 {
@@ -17,21 +20,31 @@ namespace Grumpy.RipplesMQ.Sample.Client1
         private readonly IMessageBus _messageBus;
         private readonly IProcessInformation _processInformation;
         private readonly CancellationTokenSource _cancellationTokenSource;
+        private readonly LogLevel _logLevel = LogLevel.Warning;
 
         public Tester()
         {
-            var builder = new MessageBusBuilder();
+            var appSettings = ConfigurationManager.AppSettings;
+
+            if (Enum.TryParse(appSettings["LogLevel"], true, out LogLevel logLevel))
+                _logLevel = logLevel;
+
+            var logger = new ConsoleLogger("Tester", (message, level) => level >= _logLevel, false);
+            var builder = new MessageBusBuilder().WithLogger(logger);
+
             _processInformation = new ProcessInformation();
             _cancellationTokenSource = new CancellationTokenSource();
-
-            _messageBus = builder.Build();
-            _messageBus.Start(_cancellationTokenSource.Token);
 
             Console.WriteLine("Control+1: Publish Topic=PersonCreated Dto=PersonDto Persistent=true");
             Console.WriteLine("Control+2: Publish Topic=TripCreated Dto=TripDto Persistent=false");
             Console.WriteLine("Control+3: Request Name=Person");
             Console.WriteLine("Control+4: Publish Topic=CarCreated Dto=CarDto Persistent=true");
             Console.WriteLine($"The {_processInformation.ProcessName} tester is now running, press Control+C to exit.");
+
+            _messageBus = builder.Build();
+            _messageBus.Start(_cancellationTokenSource.Token);
+
+            Console.WriteLine("RipplesMQ MessageBus Started");
         }
 
         public void Execute()

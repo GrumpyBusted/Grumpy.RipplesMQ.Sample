@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading;
 using Grumpy.Json;
 using Grumpy.RipplesMQ.Client;
@@ -6,27 +7,53 @@ using Grumpy.RipplesMQ.Client.Interfaces;
 using Grumpy.RipplesMQ.Sample.API;
 using Grumpy.RipplesMQ.Sample.API.DTOs;
 using Grumpy.ServiceBase;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Grumpy.RipplesMQ.Sample.Server2
 {
-    public class Server2Service : TopshelfServiceBase
+    public class Server2Service : TopshelfServiceBase, IDisposable
     {
         private IMessageBus _messageBus;
+        private LogLevel _logLevel = LogLevel.Warning;
+        private bool _disposed;
 
         protected override void Process(CancellationToken cancellationToken)
         {
-            _messageBus = new MessageBusBuilder().Build();
+            Logger = new ConsoleLogger(ServiceName, (message, level) => level >= _logLevel, false);
+            
+            var appSettings = ConfigurationManager.AppSettings;
+
+            if (Enum.TryParse(appSettings["LogLevel"], true, out LogLevel logLevel))
+                _logLevel = logLevel;
+
+            _messageBus = new MessageBusBuilder().WithServiceName(ServiceName).WithLogger(Logger).Build();
 
             _messageBus.SubscribeHandler<PersonDto>(SampleApiConfiguration.PersonCreated, HandlePersonCreated, "HandlePersonCreated", true, true);
             _messageBus.SubscribeHandler<TripDto>(SampleApiConfiguration.TripCreated, HandleTripCreated, "HandleTripCreated", true, true);
             _messageBus.RequestHandler<PersonKeyDto, PersonDto>(SampleApiConfiguration.Person, PersonHandler, true);
 
             _messageBus.Start(cancellationToken);
+
+            Console.WriteLine("RipplesMQ MessageBus Started");
         }
 
-        protected override void Clean()
+        public new void Dispose()
         {
-            _messageBus?.Dispose();
+            Dispose(true);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                _disposed = true;
+
+                if (disposing)
+                    _messageBus?.Dispose();
+
+                base.Dispose(disposing);
+            }
         }
 
         private static void HandlePersonCreated(PersonDto dto, CancellationToken cancellationToken)

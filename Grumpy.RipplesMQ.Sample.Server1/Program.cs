@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using Grumpy.ServiceBase;
 
 namespace Grumpy.RipplesMQ.Sample.Server1
@@ -8,7 +7,7 @@ namespace Grumpy.RipplesMQ.Sample.Server1
     {
         private static void Main()
         {
-            Thread.Sleep(3000);
+            Thread.Sleep(8000);
 
             TopshelfUtility.Run<Server1Service>();
         }
