@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.Threading;
 using Grumpy.Common.Extensions;
-using Grumpy.Logging;
 using Grumpy.RipplesMQ.Core.Interfaces;
 using Grumpy.RipplesMQ.Server;
 using Grumpy.ServiceBase;
