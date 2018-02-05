@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace Grumpy.RipplesMQ.Sample.Client1
 {
@@ -6,7 +7,8 @@ namespace Grumpy.RipplesMQ.Sample.Client1
     {
         private static void Main()
         {
-            Thread.Sleep(4000);
+            Console.WriteLine("Press key to start");
+            Console.ReadKey(true);
 
             using (var client = new Tester())
             {
