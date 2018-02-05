@@ -6,7 +6,7 @@ namespace Grumpy.RipplesMQ.Sample.Client1
     {
         private static void Main()
         {
-            Thread.Sleep(12000);
+            Thread.Sleep(4000);
 
             using (var client = new Tester())
             {

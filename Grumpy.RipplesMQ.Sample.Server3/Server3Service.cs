@@ -17,6 +17,9 @@ namespace Grumpy.RipplesMQ.Sample.Server3
         private IMessageBus _messageBus;
         private LogLevel _logLevel = LogLevel.Warning;
         private bool _disposed;
+        private static int _notifyPersonCount;
+        private static int _carCreatedCount;
+        private static int _tripCreatedCount;
 
         protected override void Process(CancellationToken cancellationToken)
         {
@@ -58,17 +61,17 @@ namespace Grumpy.RipplesMQ.Sample.Server3
 
         private static void NotifyPerson(PersonDto dto, CancellationToken cancellationToken)
         {
-            Console.WriteLine("NotifyPerson: " + dto.SerializeToJson());
+            Console.WriteLine($"NotifyPerson {++_notifyPersonCount}: " + dto.SerializeToJson());
         }
 
         private static void HandleCarCreated(CarDto dto, CancellationToken cancellationToken)
         {
-            Console.WriteLine("HandleCarCreated: " + dto.SerializeToJson());
+            Console.WriteLine($"HandleCarCreated {++_carCreatedCount}: " + dto.SerializeToJson());
         }
 
         private static void HandleTripCreated(TripDto dto, CancellationToken cancellationToken)
         {
-            Console.WriteLine("HandleTripCreated: " + dto.SerializeToJson());
+            Console.WriteLine($"HandleTripCreated {++_tripCreatedCount}: " + dto.SerializeToJson());
         }
     }
 }

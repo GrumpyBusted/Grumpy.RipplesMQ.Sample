@@ -7,7 +7,7 @@ namespace Grumpy.RipplesMQ.Sample.Server3
     {
         private static void Main()
         {
-            Thread.Sleep(10000);
+            Thread.Sleep(3000);
 
             TopshelfUtility.Run<Server3Service>();
         }
