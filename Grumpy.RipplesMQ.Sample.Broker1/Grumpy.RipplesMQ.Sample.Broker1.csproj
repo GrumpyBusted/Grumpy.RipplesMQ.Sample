@@ -55,7 +55,7 @@
       <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Grumpy.RipplesMQ.Server">
-      <Version>1.1.44</Version>
+      <Version>1.1.58</Version>
     </PackageReference>
     <PackageReference Include="Grumpy.ServiceBase">
       <Version>1.1.16</Version>

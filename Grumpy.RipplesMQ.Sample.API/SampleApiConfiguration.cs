@@ -27,5 +27,17 @@ namespace Grumpy.RipplesMQ.Sample.API
             Name = "Person",
             MillisecondsTimeout = 10000
         };
+
+        public static readonly RequestResponseConfig NonExisting = new RequestResponseConfig
+        {
+            Name = "NonExisting",
+            MillisecondsTimeout = 10000
+        };
+
+        public static readonly PublishSubscribeConfig NonExistingCreated = new PublishSubscribeConfig()
+        {
+            Topic = "NonExistingCreated",
+            Persistent = false
+        };
     }
 }

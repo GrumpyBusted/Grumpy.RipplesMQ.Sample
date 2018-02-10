@@ -26,7 +26,6 @@ namespace Grumpy.RipplesMQ.Sample.Client1
         private readonly LogLevel _logLevel = LogLevel.Warning;
         private readonly ILogger _logger;
 
-
         public Tester()
         {
             var appSettings = ConfigurationManager.AppSettings;
@@ -48,6 +47,7 @@ namespace Grumpy.RipplesMQ.Sample.Client1
             Console.WriteLine("Control+6: RequestAsync Name=Person with id 1 (n Times)");
             Console.WriteLine("Control+7: Publish Persistent Message (n Times)");
             Console.WriteLine("Control+8: Publish Non-Persistent Message (n Times)");
+            Console.WriteLine("Control+9: Request NonExisting");
             Console.WriteLine($"The {_processInformation.ProcessName} tester is now running, press Control+C to exit.");
 
             try
@@ -84,7 +84,7 @@ namespace Grumpy.RipplesMQ.Sample.Client1
                     else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D2)
                         PublishTripCreated(ref inputString);
                     else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D3)
-                        Request(ref inputString);
+                        RequestPerson(ref inputString);
                     else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D4)
                         PublishCarCreated(ref inputString);
                     else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D5)
@@ -95,6 +95,10 @@ namespace Grumpy.RipplesMQ.Sample.Client1
                         PublishPersistent(ref inputString);
                     else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D8)
                         PublishNonPersistent(ref inputString);
+                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D9)
+                        RequestNonExisting(ref inputString);
+                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D0)
+                        PublishNonExisting(ref inputString);
                     else if ((key.Modifiers & ConsoleModifiers.Control) == 0 &&
                              (key.Modifiers & ConsoleModifiers.Alt) == 0 && key.Key != ConsoleKey.Backspace)
                         CaptureInput(ref inputString, key.KeyChar);
@@ -159,6 +163,13 @@ namespace Grumpy.RipplesMQ.Sample.Client1
             input = "";
         }
 
+        private void PublishNonExisting(ref string input)
+        {
+            Publish(SampleApiConfiguration.NonExistingCreated, "Message");
+
+            input = "";
+        }
+
         private void Publish<T>(PublishSubscribeConfig config, T message)
         {
             Console.WriteLine();
@@ -175,13 +186,20 @@ namespace Grumpy.RipplesMQ.Sample.Client1
             }
         }
 
-        private void Request(ref string input)
+        private void RequestPerson(ref string input)
         {
             var request = new PersonKeyDto();
 
             int.TryParse(input, out request.Id);
 
             Request<PersonKeyDto, PersonDto>(SampleApiConfiguration.Person, request);
+
+            input = "";
+        }
+
+        private void RequestNonExisting(ref string input)
+        {
+            Request<string, string>(SampleApiConfiguration.NonExisting, input);
 
             input = "";
         }
