@@ -39,15 +39,15 @@ namespace Grumpy.RipplesMQ.Sample.Client1
             _processInformation = new ProcessInformation();
             _cancellationTokenSource = new CancellationTokenSource();
 
-            Console.WriteLine("Control+1: Publish Topic=PersonCreated Dto=PersonDto Persistent=true");
-            Console.WriteLine("Control+2: Publish Topic=TripCreated Dto=TripDto Persistent=false");
-            Console.WriteLine("Control+3: Request Name=Person");
-            Console.WriteLine("Control+4: Publish Topic=CarCreated Dto=CarDto Persistent=true");
-            Console.WriteLine("Control+5: RequestSync Name=Person with id 1 (n Times)");
-            Console.WriteLine("Control+6: RequestAsync Name=Person with id 1 (n Times)");
-            Console.WriteLine("Control+7: Publish Persistent Message (n Times)");
-            Console.WriteLine("Control+8: Publish Non-Persistent Message (n Times)");
-            Console.WriteLine("Control+9: Request NonExisting");
+            Console.WriteLine("Alt+1: Publish Topic=PersonCreated Dto=PersonDto Persistent=true");
+            Console.WriteLine("Alt+2: Publish Topic=TripCreated Dto=TripDto Persistent=false");
+            Console.WriteLine("Alt+3: Request Name=Person");
+            Console.WriteLine("Alt+4: Publish Topic=CarCreated Dto=CarDto Persistent=true");
+            Console.WriteLine("Alt+5: RequestSync Name=Person with id 1 (n Times)");
+            Console.WriteLine("Alt+6: RequestAsync Name=Person with id 1 (n Times)");
+            Console.WriteLine("Alt+7: Publish Persistent Message (n Times)");
+            Console.WriteLine("Alt+8: Publish Non-Persistent Message (n Times)");
+            Console.WriteLine("Alt+9: Request NonExisting");
             Console.WriteLine($"The {_processInformation.ProcessName} tester is now running, press Control+C to exit.");
 
             try
@@ -79,25 +79,25 @@ namespace Grumpy.RipplesMQ.Sample.Client1
                         Cancel();
                     else if (key.Key == ConsoleKey.Delete)
                         Clear(out inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D1)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D1)
                         PublishPersonCreated(ref inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D2)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D2)
                         PublishTripCreated(ref inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D3)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D3)
                         RequestPerson(ref inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D4)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D4)
                         PublishCarCreated(ref inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D5)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D5)
                         RequestMulti(ref inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D6)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D6)
                         RequestAsyncMulti(ref inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D7)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D7)
                         PublishPersistent(ref inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D8)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D8)
                         PublishNonPersistent(ref inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D9)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D9)
                         RequestNonExisting(ref inputString);
-                    else if ((key.Modifiers & ConsoleModifiers.Control) != 0 && key.Key == ConsoleKey.D0)
+                    else if ((key.Modifiers & ConsoleModifiers.Alt) != 0 && key.Key == ConsoleKey.D0)
                         PublishNonExisting(ref inputString);
                     else if ((key.Modifiers & ConsoleModifiers.Control) == 0 &&
                              (key.Modifiers & ConsoleModifiers.Alt) == 0 && key.Key != ConsoleKey.Backspace)
@@ -165,7 +165,7 @@ namespace Grumpy.RipplesMQ.Sample.Client1
 
         private void PublishNonExisting(ref string input)
         {
-            Publish(SampleApiConfiguration.NonExistingCreated, "Message");
+            Publish(SampleApiConfiguration.NonExistingCreated, input);
 
             input = "";
         }

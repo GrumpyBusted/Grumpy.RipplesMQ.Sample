@@ -34,7 +34,7 @@ namespace Grumpy.RipplesMQ.Sample.API
             MillisecondsTimeout = 10000
         };
 
-        public static readonly PublishSubscribeConfig NonExistingCreated = new PublishSubscribeConfig()
+        public static readonly PublishSubscribeConfig NonExistingCreated = new PublishSubscribeConfig
         {
             Topic = "NonExistingCreated",
             Persistent = false
